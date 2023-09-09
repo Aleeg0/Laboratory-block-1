@@ -1,0 +1,3 @@
+Для Java - Main.java;
+Для C++ - excercise 1.cpp;
+Для Delpi - excercise1.dpr
