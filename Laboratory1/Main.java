@@ -8,10 +8,10 @@ public class Main
     {
         //initialization
         double num1 = 0, num2 = 0, arithmeticAvg = 0, geometricAvg = 0;
-        boolean badFlag = false;
+        boolean goodFlag = false;
         //output task
         System.out.println("  The program is proving that arithmetic average of two unsigned \n"
-            + "double numbers bigger or equal than geometric average of this numbers.\n");
+                + "double numbers bigger or equal than geometric average of this numbers.\n");
         do {
             try
             {
@@ -37,7 +37,8 @@ public class Main
                     System.out.println("Arithmetic average = Geometric average");
                 else
                     System.out.println("Arithmetic average > Geometric average");
-                badFlag = false;
+                goodFlag = true;
+                in.close();
             }
             catch (Exception ex)
             {
@@ -45,8 +46,7 @@ public class Main
                     System.out.println("Invalid type!!!" + " Try again.");
                 else
                     System.out.println(ex.getMessage() + " Try again.");
-                badFlag = true;
             }
-        } while (badFlag);
+        } while (!goodFlag);
     }
 }
