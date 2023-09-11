@@ -47,12 +47,11 @@ Begin
             End;
         Except
             On E: Exception Do
-            Begin
-                Write(E.Message);
-                Writeln(' Try again.');
-                Writeln('');
-                GoodFlag := False;
-            End;
+                Begin
+                    Write(E.Message);
+                    Writeln(' Try again.');
+                    Writeln('');
+                End;
         End;
     Until (GoodFlag);
     // freeze console
