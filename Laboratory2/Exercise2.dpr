@@ -3,7 +3,7 @@ Program Exercise2;
 Uses
     System.SysUtils;
 
-    // initialization
+// initialization
 Var
     N: Integer = 0;
     Sum: Integer = 0;
