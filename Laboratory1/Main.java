@@ -9,9 +9,10 @@ public class Main
         //initialization
         double num1 = 0, num2 = 0, arithmeticAvg = 0, geometricAvg = 0;
         boolean goodFlag = false;
-        //output task
+        //output the task
         System.out.println("  The program is proving that arithmetic average of two unsigned \n"
                 + "double numbers bigger or equal than geometric average of this numbers.\n");
+        //loop for check inputted symbols
         do {
             try
             {
@@ -25,19 +26,7 @@ public class Main
                 num2 = in.nextDouble();
                 if (num2 < 0)
                     throw new Exception("It's impossible to solve this exercise with num2 < 0!!!");
-                //main block
-                arithmeticAvg = (num1 + num2) / 2;
-                geometricAvg = Math.sqrt(num1 * num2);
-                //output
-                System.out.printf("""
-                        Arithmetic average: %f
-                        Geometric average: %f
-                        """, arithmeticAvg,geometricAvg);
-                if (arithmeticAvg == geometricAvg)
-                    System.out.println("Arithmetic average = Geometric average");
-                else
-                    System.out.println("Arithmetic average > Geometric average");
-                goodFlag = true;
+                goodFlag = true; // to exit the loop if user entered correct symbols
                 in.close();
             }
             catch (Exception ex)
@@ -48,5 +37,17 @@ public class Main
                     System.out.println(ex.getMessage() + " Try again.");
             }
         } while (!goodFlag);
+        //main block
+        arithmeticAvg = (num1 + num2) / 2;
+        geometricAvg = Math.sqrt(num1 * num2);
+        //output
+        System.out.printf("""
+                        Arithmetic average: %f
+                        Geometric average: %f
+                        """, arithmeticAvg,geometricAvg);
+        if (arithmeticAvg == geometricAvg)
+            System.out.println("Arithmetic average = Geometric average");
+        else
+            System.out.println("Arithmetic average > Geometric average");
     }
 }
