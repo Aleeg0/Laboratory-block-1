@@ -7,9 +7,10 @@ int main()
     //initialization
     double num1 = 0, num2 = 0, arithmeticAvg = 0, geometricAvg = 0;
     bool goodFlag = false; // for loop if wrong input
-    //output task
+    //output the task
     std::cout << "  The program is proving that arithmetic average of two unsigned\n"
         << "double numbers bigger or equal than geometric average of this numbers.\n\n";
+    //loop for check inputted symbols
     do
     {
         try
@@ -35,21 +36,21 @@ int main()
             }
             if (num2 < 0)
                 throw std::exception("Entering number cannot be less than 1!!!");
-            //main block
-            arithmeticAvg = (num1 + num2) / 2;
-            geometricAvg = sqrt(num1 * num2);
-            //output
-            std::cout << "\nArithmetic average: " << arithmeticAvg
-                << "\nGeometric average: " << std::fixed << std::setprecision(4) << geometricAvg
-                << ((arithmeticAvg == geometricAvg)
-                    ? "\nArithmetic average = Geometricaverage\n"
-                    : "\nGeometric average > Arithmetic average\n");
-            goodFlag = true;
+            goodFlag = true; // to exit the loop if user entered correct symbols 
         }
         catch (const std::exception& ex)
         {
             std::cout << ex.what() << " Try again.\n\n";
         }
     } while (!goodFlag);
+    //main block
+    arithmeticAvg = (num1 + num2) / 2;
+    geometricAvg = sqrt(num1 * num2);
+    //output
+    std::cout << "\nArithmetic average: " << arithmeticAvg
+        << "\nGeometric average: " << std::fixed << std::setprecision(4) << geometricAvg
+        << ((arithmeticAvg == geometricAvg)
+            ? "\nArithmetic average = Geometricaverage\n"
+            : "\nGeometric average > Arithmetic average\n");
     return 0;
 }
