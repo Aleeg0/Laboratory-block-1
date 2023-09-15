@@ -1,4 +1,4 @@
-﻿#include<iostream>
+#include<iostream>
 
 
 int main()
@@ -37,7 +37,7 @@ int main()
     {
         number *= 2;
         if (i % 2 != 0)
-            sum += -number;
+            sum -= number;
         else
             sum += number;
     }
