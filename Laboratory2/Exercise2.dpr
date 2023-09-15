@@ -41,8 +41,9 @@ Begin
     Begin
         NumberInLoop := NumberInLoop * 2;
         If I Mod 2 <> 0 Then
-            Sum := Sum - NumberInLoop;
-        Sum := Sum + NumberInLoop;
+            Sum := Sum - NumberInLoop
+        Else
+            Sum := Sum + NumberInLoop;
     End;
     // output
     Writeln('Sum equal ', Sum);
