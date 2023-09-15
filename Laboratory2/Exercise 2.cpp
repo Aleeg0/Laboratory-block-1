@@ -24,7 +24,7 @@ int main()
             }
             if (n < 1)
                 throw std::exception("N cannot be less than 1!!!");
-            goodFlag = true; // to exit the loop if user entered correct symbols  
+            goodFlag = true; // to exit the loop if user entered correct symbols
         }
         catch (const std::exception& ex)
         {
@@ -32,16 +32,14 @@ int main()
         }
     } while (!goodFlag);
     //main block
+    int number = 1;
     for (int i = 1; i <= n; i++)
     {
-        int number = 2;
-        for (int j = 1; j < i; j++)
-        {
-            number *= 2;
-        }
+        number *= 2;
         if (i % 2 != 0)
-            number *= -1;
-        sum += number;
+            sum += -number;
+        else
+            sum += number;
     }
     //output
     std::cout << "Sum equal " << sum << std::endl;
