@@ -7,7 +7,7 @@ Uses
 Var
     N: Integer = 0;
     Sum: Integer = 0;
-    NumberInLoop: Integer = 0;
+    NumberInLoop: Integer = 1;
     // Low numbers for loops
     I: Integer;
     J: Integer;
@@ -39,11 +39,9 @@ Begin
     // main block
     For I := 1 To N Do
     Begin
-        NumberInLoop := 2;
-        For J := 1 To I - 1 Do
-            NumberInLoop := NumberInLoop * 2;
+        NumberInLoop := NumberInLoop * 2;
         If I Mod 2 <> 0 Then
-            NumberInLoop := -NumberInLoop;
+            Sum := Sum - NumberInLoop;
         Sum := Sum + NumberInLoop;
     End;
     // output
