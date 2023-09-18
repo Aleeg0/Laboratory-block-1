@@ -10,7 +10,6 @@ Var
     NumberInLoop: Integer = 1;
     // Low numbers for loops
     I: Integer;
-    J: Integer;
     // Flag for end loop for inputted symbols
     GoodFlag: Boolean = False;
 
