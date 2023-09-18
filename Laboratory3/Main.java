@@ -51,7 +51,12 @@ public class Main {
                 System.out.println("Enter X0");
                 xLast = Double.parseDouble(in.nextLine());
                 if (xLast < 0 || xLast == 0) {
-                    System.out.print("X0 cannot be less or equal than 0, because in the task there's logarithm(7.622x > 0)!!!");
+                    System.out.print("X0 cannot be less or equal than 0, because in the task there's logarithm!!! (7.622x > 0)");
+                    throw new Exception();
+                }
+                if ((double)(100)/((double)(859) * xLast) > 1)
+                {
+                    System.out.print("The problem is not solvable using the inputted X0!!!");
                     throw new Exception();
                 }
                 goodFlag = true; // to exit the loop if user entered correct limits
@@ -66,32 +71,26 @@ public class Main {
         }while(!goodFlag);
         in.close();
         // main block
-        if ((double)(100)/((double)(859) * xLast) >= 1)
+        //creating table
+        System.out.printf("     %-5s|", "N");
+        System.out.printf("    %-6s|", "X-1");
+        System.out.println("    X");
+        System.out.println("--------------------------------");
+        while(!isFinding)
         {
-            isFinding = true;
-            System.out.println("The problem is not solvable using the inputted X0!!!");
+            x = (Math.log(7.622 * xLast) + 5) / 8.59;
+            System.out.printf("%-10s|", counter);
+            System.out.printf("%f  |", xLast);
+            //System.out.printf("%-10s|", xLast);
+            System.out.printf("%f\n", x);
+            if (Math.abs(x - xLast) < eps)
+                isFinding = true;
+            else
+                xLast = x;
+            counter += 1;
         }
-        else
-        {
-            //creating table
-            System.out.printf("     %-5s|", "N");
-            System.out.printf("    %-6s|", "X-1");
-            System.out.println("    X");
-            System.out.println("--------------------------------");
-            while(!isFinding)
-            {
-                x = (Math.log(7.622 * xLast) + 5) / 8.59;
-                System.out.printf("%-10s|", counter);
-                System.out.printf("%f  |", xLast);
-                //System.out.printf("%-10s|", xLast);
-                System.out.printf("%f\n", x);
-                if (Math.abs(x - xLast) < eps)
-                    isFinding = true;
-                else
-                    xLast = x;
-            }
-            // output
-            System.out.printf("The answer of this task is %f.\n", x);
-        }
+        // output
+        System.out.printf("\nThe answer of this task is %f.\n", x);
+
     }
 }
