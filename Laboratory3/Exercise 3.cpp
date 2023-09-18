@@ -1,26 +1,28 @@
-﻿#include<iostream>
+#include<iostream>
 #include<math.h>
-#include<iomanip>
+#include<iomanip> //for std::setw() and std::left nad std::right
 
 
 int main()
 {
     //initialization
     int counter = 0; //for input
-    double eps = 0, a = 0, b = 0, xLast = 0, x = 0;
+    double eps = 0, xLast = 0, x = 0;
     bool isFinding = false, // for task
         goodFlag = false; // for exit loop
     //output the task
-    std::cout << "Program solves this example: Ln(7.622x) - 8.59x + 5 = 0.\n";
-    std::cout << "It's recommended to input epsilon in standard form.\n"
-        << "Example: 1e-9\n";
+    std::cout << "Program solves this example: Ln(7.622x) - 8.59x + 5 = 0.\n"
+              << "It's recommended to input epsilon, using standard form.\n"
+              << "Example: 1e-9\n"
+              << "Or using normal input.\n"
+              << "Example: 0.1\n";
     // loop for check inputted eps
     do
     {
         try
         {
             //input
-            std::cout << "Input eps:\n";
+            std::cout << "Enter eps:\n";
             std::cin >> eps;
             if (std::cin.get() != '\n')
             {
@@ -28,7 +30,7 @@ int main()
                 std::cin.ignore(20000,'\n');
                 throw std::exception("Invalid type!!!");
             }
-            if (eps > 1.0e-8)
+            if (eps > 0.1)
                 throw std::exception("Eps is too big!!!");
             if (eps < 1.0e-17)
                 throw std::exception("Eps is too little!!!");
@@ -39,34 +41,24 @@ int main()
             std::cout << ex.what() << " Try again!!!\n";
         }
     } while (!goodFlag);
-    // output some info
-    std::cout << "a and b are limits of isolation interval:\n";
-    // loop for check inputted limits of isolation interval
+    // output some more info
+    std::cout << "To start program also needs to input X0:\n";
+    // loop for check inputted X0
     goodFlag = false;
     do
     {
         try
         {
-            std::cout << "Enter a:\n";
-            std::cin >> a;
+            std::cout << "Enter X0:\n";
+            std::cin >> xLast;
             if (std::cin.get() != '\n')
             {
                 std::cin.clear();
                 std::cin.ignore(20000, '\n');
                 throw std::exception("Invalid type!!!");
             }
-            if (a < 0 || a == 0)
-                throw std::exception("a cannot be less or equal than 0, because in the task there's logarithm!!!");
-            std::cout << "Enter b:\n";
-            std::cin >> b;
-            if (std::cin.get() != '\n')
-            {
-                std::cin.clear();
-                std::cin.ignore(20000, '\n');
-                throw std::exception("Invalid type!!!");
-            }
-            if (b < 0 || b == 0)
-                throw std::exception("b cannot be less or equal than 0, because in the task there's logarithm!!!");
+            if (xLast < 0 || xLast == 0)
+                throw std::exception("X0 cannot be less or equal than 0, because in the task there's logarithm(7.622x > 0)!!!");
             goodFlag = true;// to exit the loop if user entered correct limits
         }
         catch (const std::exception& ex)
@@ -75,34 +67,32 @@ int main()
         }
     } while (!goodFlag);
     // main block
-    if ((double)100 / ((double)859 * a) < 1)
-        xLast = a;
-    else if ((double)100 / ((double)859 * b) < 1)
-        xLast = b;
+    if ((double)100 / ((double)859 * xLast) >= 1)
+    {
+        std::cout << "The problem is not solvable using the inputted X0!!!\n";
+    }
     else
     {
-        isFinding = true;
-        std::cout << "The problem is not solvable using the inputted limits!!!\n";
-        return 0;
-    }
-    //output
-    if (!isFinding) // creating table
-        std::cout << std::endl << std::setw(11) << std::left << "   n"
-                  << std::setw(13) << std::left << "x-1"
-                  << "x" << std::endl;
-    while (!isFinding)
-    {
-        x = (log(7.622 * xLast) + 5) / 8.59;
-        std::cout << std::setw(5) << std::left << counter++ << " | "
-                  << std::setw(10) << std::left << xLast << " | "
+        //output
+        // creating table
+        std::cout << std::endl << std::setw(6) << std::left << "   n"
+                  << std::setw(13) << std::left << "|     x-1" 
+                  << "|     x" << std::endl
+                  << "--------------------------------\n";
+        while (!isFinding)
+        {
+            x = (log(7.622 * xLast) + 5) / 8.59;
+            std::cout << std::setw(5) << std::left << counter++ << " | "
+                      << std::setw(10) << std::left << xLast << " | "
+                      << x << std::endl;
+            if (abs(x - xLast) < eps)
+                isFinding = true;
+            else
+                xLast = x;
+        }
+        //output
+        std::cout << "\nThe answer of this task is "
                   << x << std::endl;
-        if (abs(x - xLast) < eps)
-            isFinding = true;
-        else
-            xLast = x;
     }
-    //output
-    std::cout << "\nThe answer of this task is "
-        << x << std::endl;
     return 0;
 }
