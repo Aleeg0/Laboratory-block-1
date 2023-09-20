@@ -1,5 +1,5 @@
 #include<iostream>
-#include<math.h>
+#include<math.h> // for log()
 #include<iomanip> // for std::setw() and std::left nad std::right
 
 
@@ -28,17 +28,17 @@ int main()
             {
                 std::cin.clear();
                 std::cin.ignore(20000,'\n');
-                throw std::exception("Invalid type!!!");
+                throw std::invalid_argument("Invalid type!!!");
             }
             if (eps > 0.1)
-                throw std::exception("Eps is too big!!!");
+                throw std::invalid_argument("Eps is too big!!!");
             if (eps < 1.0e-17)
-                throw std::exception("Eps is too little!!!");
+                throw std::invalid_argument("Eps is too little!!!");
             goodFlag = true;// to exit the loop if user entered correct epsilon
         }
-        catch (const std::exception& ex)
+        catch (const std::invalid_argument& invArgument)
         {
-            std::cout << ex.what() << " Try again.\n";
+            std::cerr << invArgument.what() << " Try again.\n";
         }
     } while (!goodFlag);
     // output some more info
@@ -55,18 +55,18 @@ int main()
             {
                 std::cin.clear();
                 std::cin.ignore(20000, '\n');
-                throw std::exception("Invalid type!!!");
+                throw std::invalid_argument("Invalid type!!!");
             }
             if (xLast < 0 || xLast == 0)
-                throw std::exception("X0 cannot be less or equal than 0, because in the task there's the logarithm!!!(7.622x > 0)");
+                throw std::invalid_argument("X0 cannot be less or equal than 0, because in the task there's the logarithm!!!(7.622x > 0)");
             // make sure that we can solve this task with current X0
             if ((double)100 / ((double)859 * xLast) > 1) 
-                throw std::exception("The problem is not solvable using the inputted X0!!!");
+                throw std::invalid_argument("The problem is not solvable using the inputted X0!!!");
             goodFlag = true;// to exit the loop if user entered correct limits
         }
-        catch (const std::exception& ex)
+        catch (const std::invalid_argument& invArgument)
         {
-            std::cout << ex.what() << " Try again.\n";
+            std::cerr << invArgument.what() << " Try again.\n";
         }
     } while (!goodFlag);
     // main block
@@ -80,14 +80,14 @@ int main()
         x = (log(7.622 * xLast) + 5) / 8.59;
         // output
         std::cout << std::setw(5) << std::left << counter++ << " | "
-                    << std::setw(10) << std::left << xLast << " | "
-                    << x << std::endl;
+                  << std::setw(10) << std::left << xLast << " | "
+                  << x << std::endl;
         // if we find the right X
         if (abs(x - xLast) < eps)
             isFinding = true;
         else
             xLast = x;
-    }
+    };
     // output
     std::cout << "\nThe answer of this task is "
                 << x << std::endl;
