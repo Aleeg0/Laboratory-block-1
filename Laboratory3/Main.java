@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 import java.math.*;
 
@@ -27,18 +26,16 @@ public class Main {
                 System.out.println("Enter eps:");
                 eps = Double.parseDouble(in.nextLine());
                 if (eps > 0.1) {
-                    throw new IOException("Eps is too big!!!");
+                    System.err.println("Eps is too big!!! Try again.");
                 }
-                if (eps < 1.0e-17) {
-                    throw new IOException("Eps is too little!!!");
+                else if (eps < 1.0e-17) {
+                    System.err.println("Eps is too little!!! Try again.");
                 }
-                goodFlag = true; // to exit the loop if user entered correct epsilon
+                else // to exit the loop if user entered correct epsilon
+                    goodFlag = true;
             }
             catch (NumberFormatException ex) {
                 System.err.println("Invalid type!!! Try again.");
-            }
-            catch (IOException ex) {
-                System.err.println(ex.getMessage() + " Try again!!!");
             }
         } while(!goodFlag);
         // output some more info
@@ -50,18 +47,16 @@ public class Main {
                 System.out.println("Enter X0");
                 xLast = Double.parseDouble(in.nextLine());
                 if (xLast < 0 || xLast == 0) {
-                    throw new IOException("X0 cannot be less or equal than 0, because in the task there's logarithm!!! (7.622x > 0)");
+                    System.err.println("X0 cannot be less or equal than 0, because in the task there's logarithm!!! (7.622x > 0) Try again.");
                 }
-                if ((double)(100)/((double)(859) * xLast) > 1) {
-                    throw new IOException("The problem is not solvable using the inputted X0!!!");
+                else if ((double)(100)/((double)(859) * xLast) > 1) {
+                    System.err.println("The problem is not solvable using the inputted X0!!! Try again.");
                 }
-                goodFlag = true; // to exit the loop if user entered correct limits
+                else // to exit the loop if user entered correct limits
+                    goodFlag = true;
             }
             catch (NumberFormatException ex) {
                 System.err.println("Invalid type!!! Try again.");
-            }
-            catch (IOException ex) {
-                System.err.println(ex.getMessage() + " Try again!!!");
             }
         } while(!goodFlag);
         in.close();
@@ -76,7 +71,6 @@ public class Main {
             x = (Math.log(7.622 * xLast) + 5) / 8.59;
             System.out.printf("%-10s|", counter);
             System.out.printf("%f  |", xLast);
-            //System.out.printf("%-10s|", xLast);
             System.out.printf("%f\n", x);
             if (Math.abs(x - xLast) < eps)
                 isFinding = true;
@@ -86,6 +80,5 @@ public class Main {
         }
         // output
         System.out.printf("\nThe answer of this task is %f.\n", x);
-
     }
 }
