@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.math.*;
 
@@ -26,20 +27,18 @@ public class Main {
                 System.out.println("Enter eps:");
                 eps = Double.parseDouble(in.nextLine());
                 if (eps > 0.1) {
-                    System.out.print("Eps is too big!!!");
-                    throw new Exception();
+                    throw new IOException("Eps is too big!!!");
                 }
                 if (eps < 1.0e-17) {
-                    System.out.print("Eps is too little!!!");
-                    throw new Exception();
+                    throw new IOException("Eps is too little!!!");
                 }
                 goodFlag = true; // to exit the loop if user entered correct epsilon
             }
-            catch (Exception ex)
-            {
-                if (ex.getMessage() != null)
-                    System.out.print("Invalid type!!!");
-                System.out.println(" Try again.");
+            catch (NumberFormatException ex) {
+                System.err.println("Invalid type!!! Try again.");
+            }
+            catch (IOException ex) {
+                System.err.println(ex.getMessage() + " Try again!!!");
             }
         } while(!goodFlag);
         // output some more info
@@ -51,24 +50,20 @@ public class Main {
                 System.out.println("Enter X0");
                 xLast = Double.parseDouble(in.nextLine());
                 if (xLast < 0 || xLast == 0) {
-                    System.out.print("X0 cannot be less or equal than 0, because in the task there's logarithm!!! (7.622x > 0)");
-                    throw new Exception();
+                    throw new IOException("X0 cannot be less or equal than 0, because in the task there's logarithm!!! (7.622x > 0)");
                 }
-                if ((double)(100)/((double)(859) * xLast) > 1)
-                {
-                    System.out.print("The problem is not solvable using the inputted X0!!!");
-                    throw new Exception();
+                if ((double)(100)/((double)(859) * xLast) > 1) {
+                    throw new IOException("The problem is not solvable using the inputted X0!!!");
                 }
                 goodFlag = true; // to exit the loop if user entered correct limits
             }
-            catch (Exception ex)
-            {
-                if (ex.getMessage() != null)
-                    System.out.print("Invalid type!!!");
-                System.out.println(" Try again.");
+            catch (NumberFormatException ex) {
+                System.err.println("Invalid type!!! Try again.");
             }
-
-        }while(!goodFlag);
+            catch (IOException ex) {
+                System.err.println(ex.getMessage() + " Try again!!!");
+            }
+        } while(!goodFlag);
         in.close();
         // main block
         //creating table
