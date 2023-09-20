@@ -33,7 +33,7 @@ Begin
                 Writeln('Epsilon is too big!!! Try again.')
             Else If Eps < 1.0E-17 Then
                 Writeln('Epsilon is too low!!! Try again.')
-            Else
+            Else // to exit the loop if user entered correct epsilon
                 GoodFlag := True;
         Except
             Writeln('Invalid numeric type!!! Try again.')
