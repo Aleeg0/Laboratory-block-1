@@ -30,18 +30,17 @@ Begin
             Writeln('Enter n:');
             Readln(N);
             If N < 1 Then
-                Raise EInOutError.Create('N cannot be less than 1');
-            // to exit the loop if user entered correct symbols
-            GoodFlag := True;
+                Writeln('N cannot be less than 1!!! Try again.')
+            Else // to exit the loop if user entered correct symbols
+                GoodFlag := True;
         Except
-            On Ex: EInOutError Do
             Begin
-                Write(Ex.Message);
-                Writeln('!!! Try again.');
+                Writeln('Invalid numeric input!!! Try again');
             End;
         End;
     Until (GoodFlag);
     // main block
+    High := N + 1;
     For Low := 1 To High Do
     Begin
         NumberInLoop := NumberInLoop * 2;
