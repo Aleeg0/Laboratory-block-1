@@ -4,7 +4,7 @@
 int main()
 {
     // intialization
-    int n = 0, sum = 0;
+    int n = 0, sum = 0, high = 0, numberInLoop = 1;
     bool goodFlag = false;
     // output the task
     std::cout << "Calculate the sum using the formula (-1)^i * 2^i:\n\n";
@@ -20,26 +20,26 @@ int main()
             {
                 std::cin.clear();
                 std::cin.ignore(451251, '\n');
-                throw std::exception("Invalid type!!!");
+                throw std::invalid_argument("Invalid type!!!");
             }
             if (n < 1)
-                throw std::exception("N cannot be less than 1!!!");
+                throw std::invalid_argument("N cannot be less than 1!!!");
             goodFlag = true; // to exit the loop if user entered correct symbols
         }
-        catch (const std::exception& ex)
+        catch (const std::invalid_argument& invArgument)
         {
-            std::cout << ex.what() << " Try again\n";
+            std::cerr << invArgument.what() << " Try again\n";
         }
     } while (!goodFlag);
     //main block
-    int number = 1;
-    for (int i = 1; i <= n; i++)
+    high = n + 1;
+    for (int i = 1; i < high; i++)
     {
-        number *= 2;
+        numberInLoop *= 2;
         if (i % 2 != 0)
-            sum -= number;
+            sum -= numberInLoop;
         else
-            sum += number;
+            sum += numberInLoop;
     }
     //output
     std::cout << "Sum equal " << sum << std::endl;
