@@ -42,28 +42,22 @@ int main()
     goodFlag = false;
     do
     {
-        try
+        std::cout << "Enter X0:\n";
+        std::cin >> xLast;
+        if (std::cin.get() != '\n')
         {
-            std::cout << "Enter X0:\n";
-            std::cin >> xLast;
-            if (std::cin.get() != '\n')
-            {
-                std::cin.clear();
-                std::cin.ignore(20000, '\n');
-                std::cout << "Invalid type!!! Try again.\n";
-            }
-            if (xLast < 0 || xLast == 0)
-                std::cout << "X0 cannot be less or equal than 0, because in the task there's the logarithm!!!(7.622x > 0)  Try again.\n";
-            // make sure that we can solve this task with current X0
-            else if ((double)100 / ((double)859 * xLast) > 1)
-                std::cout << "The problem is not solvable using the inputted X0!!! Try again.\n";
-            else // to exit the loop if user entered correct limits
-                goodFlag = true;
+            std::cin.clear();
+            std::cin.ignore(20000, '\n');
+            std::cout << "Invalid type!!! Try again.\n";
         }
-        catch (const std::invalid_argument& invArgument)
-        {
-            std::cerr << invArgument.what() << " Try again.\n";
-        }
+        if (xLast < 0 || xLast == 0)
+            std::cout << "X0 cannot be less or equal than 0, because in the task there's the logarithm!!!(7.622x > 0)  Try again.\n";
+        // make sure that we can solve this task with current X0
+        else if ((double)100 / ((double)859 * xLast) > 1)
+            std::cout << "The problem is not solvable using the inputted X0!!! Try again.\n";
+        else // to exit the loop if user entered correct limits
+            goodFlag = true;
+
     } while (!goodFlag);
     // main block
     // creating table
@@ -86,6 +80,6 @@ int main()
     };
     // output
     std::cout << "\nThe answer of this task is "
-                << x << std::endl;
+              << x << std::endl;
     return 0;
 }
