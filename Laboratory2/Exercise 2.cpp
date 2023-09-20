@@ -11,25 +11,19 @@ int main()
     // loop for check inputted symbols
     do
     {
-        try
+        //input
+        std::cout << "Enter n:\n";
+        std::cin >> n;
+        if (std::cin.get() != '\n')
         {
-            //input
-            std::cout << "Enter n:\n";
-            std::cin >> n;
-            if (std::cin.get() != '\n')
-            {
-                std::cin.clear();
-                std::cin.ignore(451251, '\n');
-                throw std::invalid_argument("Invalid type!!!");
-            }
-            if (n < 1)
-                throw std::invalid_argument("N cannot be less than 1!!!");
-            goodFlag = true; // to exit the loop if user entered correct symbols
+            std::cin.clear();
+            std::cin.ignore(451251, '\n');
+            std::cout << "Invalid input!!! Try again\n";
         }
-        catch (const std::invalid_argument& invArgument)
-        {
-            std::cerr << invArgument.what() << " Try again\n";
-        }
+        if (n < 1)
+            std::cout << "N cannot be less than 1!!! Try again.\n";
+        else // to exit the loop if user entered correct symbols
+            goodFlag = true;
     } while (!goodFlag);
     //main block
     high = n + 1;
