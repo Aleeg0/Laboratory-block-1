@@ -8,9 +8,9 @@ public class Main {
         boolean goodFlag = false, //for exit loop
                 isFinding = false; // for task
         int counter = 0;
-        double eps = 0,
-                xLast = 0, // X0
-                x = 0;
+        double eps = 0.0,
+                xLast = 0.0, // X0
+                x = 0.0;
         Scanner in = new Scanner(System.in);
         //output the task
         System.out.print("""
