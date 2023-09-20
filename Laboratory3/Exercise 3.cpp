@@ -7,7 +7,7 @@ int main()
 {
     // initialization
     int counter = 0; //for input
-    double eps = 0, xLast = 0, x = 0;// xLast is x0
+    double eps = 0.0, xLast = 0.0, x = 0.0;// xLast is x0
     bool isFinding = false, // for task
         goodFlag = false; // for exit loop
     // output the task
