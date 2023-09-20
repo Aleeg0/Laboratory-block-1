@@ -30,16 +30,13 @@ Begin
             Writeln('Enter eps:');
             Readln(Eps);
             If Eps > 0.1 Then
-                Raise EInOutError.Create('Epsilon is too big!!!');
-            If Eps < 1.0E-17 Then
-                Raise EInOutError.Create('Epsilon is too low!!!');
-            GoodFlag := True;
+                Writeln('Epsilon is too big!!! Try again.')
+            Else If Eps < 1.0E-17 Then
+                Writeln('Epsilon is too low!!! Try again.')
+            Else
+                GoodFlag := True;
         Except
-            On E: EInOutError Do
-            Begin
-                Write(E.Message);
-                Writeln(' Try again.');
-            End;
+            Writeln('Invalid numeric type!!! Try again.')
         End;
     Until GoodFlag;
     // output some more info
@@ -51,18 +48,13 @@ Begin
             Writeln('Enter X0:');
             Readln(XLast); // x0
             If (XLast < 0) Or (XLast = 0) Then
-                Raise EInOutError.Create
-                    ('X0 cannot be less or equal than 0, because in the task there is logarithm(7.622x > 0)!!!');
-            If 100 / (859 * XLast) > 1 Then
-                Raise EInOutError.Create
-                    ('The problem is not solvable using the inputted X0!!!');
-            GoodFlag := True;
+                Writeln('X0 cannot be less or equal than 0, because in the task there is logarithm(7.622x > 0)!!! Try again.')
+            Else If 100 / (859 * XLast) > 1 Then
+                Writeln('The problem is not solvable using the inputted X0!!! Try again.')
+            Else
+                GoodFlag := True;
         Except
-            On E: EInOutError Do
-            Begin
-                Write(E.Message);
-                Writeln(' Try again.');
-            End;
+            Writeln('Invalid numeric type!!! Try again.');
         End;
     Until GoodFlag;
     Writeln(#9, 'N', #9, '|     X - 1', #9, '|', #9, 'X');
