@@ -1,10 +1,12 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         // initialization
-        int n = 0, sum = 0;
+        int n = 0, sum = 0, high = 0, number = 1;
         boolean goodFlag = false;
+        Scanner in = new Scanner(System.in);
         // output the task
         System.out.println("Calculate the sum using the formula (-1)^i * 2^i.\n");
         // loop for check inputted symbols
@@ -12,26 +14,26 @@ public class Main {
             try {
                 //input
                 System.out.println("Enter n:");
-                Scanner in = new Scanner(System.in);
-                n = in.nextInt();
+                n = Integer.parseInt(in.nextLine());
                 //check if input is wrong or less than 0
-                if (n < 1)
-                    throw new Exception("n cannot be less than 1!!!");
+                if (n < 1) {
+                    throw new IOException("n cannot be less than 1!!!");
+                }
                 goodFlag = true; // to exit the loop if user entered correct symbols
-                in.close();
             }
-            catch (Exception ex)
+            catch (NumberFormatException ex)
             {
-                if (ex.getMessage() == null)
-                    System.out.print("Invalid type!!!");
-                else
-                    System.out.print(ex.getMessage());
-                System.out.println(" Try again.");
+                System.err.println("Invalid type!!! Try again.");
+            }
+            catch (IOException ex)
+            {
+                System.err.println(ex.getMessage() + " Try again.");
             }
         } while(!goodFlag);
+        in.close();
         //main block
-        int number = 1;
-        for (int i = 1; i <= n; i++)
+        high = n + 1;
+        for (int i = 1; i < high; i++)
         {
             number *= 2;
             if (i % 2 != 0)
