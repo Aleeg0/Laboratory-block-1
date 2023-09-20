@@ -19,27 +19,22 @@ int main()
     // loop for check inputted eps
     do
     {
-        try
+        //input
+        std::cout << "Enter eps:\n";
+        std::cin >> eps;
+        if (std::cin.get() != '\n')
         {
-            //input
-            std::cout << "Enter eps:\n";
-            std::cin >> eps;
-            if (std::cin.get() != '\n')
-            {
-                std::cin.clear();
-                std::cin.ignore(20000,'\n');
-                throw std::invalid_argument("Invalid type!!!");
-            }
-            if (eps > 0.1)
-                throw std::invalid_argument("Eps is too big!!!");
-            if (eps < 1.0e-17)
-                throw std::invalid_argument("Eps is too little!!!");
-            goodFlag = true;// to exit the loop if user entered correct epsilon
+            std::cin.clear();
+            std::cin.ignore(20000, '\n');
+            std::cout << "Invalid type!!! Try again.\n";
         }
-        catch (const std::invalid_argument& invArgument)
-        {
-            std::cerr << invArgument.what() << " Try again.\n";
-        }
+        if (eps > 0.1)
+            std::cout << "Eps is too big!!! Try again.\n";
+        else if (eps < 1.0e-17)
+            std::cout << "Eps is too little!!! Try again.\n";
+        else // to exit the loop if user entered correct epsilon
+            goodFlag = true;
+
     } while (!goodFlag);
     // output some more info
     std::cout << "To start program also needs to input X0:\n";
@@ -55,14 +50,15 @@ int main()
             {
                 std::cin.clear();
                 std::cin.ignore(20000, '\n');
-                throw std::invalid_argument("Invalid type!!!");
+                std::cout << "Invalid type!!! Try again.\n";
             }
             if (xLast < 0 || xLast == 0)
-                throw std::invalid_argument("X0 cannot be less or equal than 0, because in the task there's the logarithm!!!(7.622x > 0)");
+                std::cout << "X0 cannot be less or equal than 0, because in the task there's the logarithm!!!(7.622x > 0)  Try again.\n";
             // make sure that we can solve this task with current X0
-            if ((double)100 / ((double)859 * xLast) > 1) 
-                throw std::invalid_argument("The problem is not solvable using the inputted X0!!!");
-            goodFlag = true;// to exit the loop if user entered correct limits
+            else if ((double)100 / ((double)859 * xLast) > 1)
+                std::cout << "The problem is not solvable using the inputted X0!!! Try again.\n";
+            else // to exit the loop if user entered correct limits
+                goodFlag = true;
         }
         catch (const std::invalid_argument& invArgument)
         {
