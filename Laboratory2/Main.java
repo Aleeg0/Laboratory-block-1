@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -17,17 +16,14 @@ public class Main {
                 n = Integer.parseInt(in.nextLine());
                 //check if input is wrong or less than 0
                 if (n < 1) {
-                    throw new IOException("n cannot be less than 1!!!");
+                    System.err.println("n cannot be less than 1!!!");
                 }
-                goodFlag = true; // to exit the loop if user entered correct symbols
+                else // to exit the loop if user entered correct symbols
+                    goodFlag = true;
             }
             catch (NumberFormatException ex)
             {
                 System.err.println("Invalid type!!! Try again.");
-            }
-            catch (IOException ex)
-            {
-                System.err.println(ex.getMessage() + " Try again.");
             }
         } while(!goodFlag);
         in.close();
