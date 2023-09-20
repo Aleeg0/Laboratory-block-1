@@ -3,16 +3,21 @@ Program Exercise3;
 Uses
     System.SysUtils;
 
-// initialization
 Var
-    Counter: Integer = 0;
-    Eps: Real = 0;
-    X: Real = 0;
-    XLast: Real = 0;
-    IsFinding: Boolean = False; // for task
-    GoodFlag: Boolean = False; // for exit loop
+    Counter: Integer;
+    Eps: Real;
+    X: Real;
+    XLast: Real;
+    IsFinding: Boolean; // for task
+    GoodFlag: Boolean; // for exit loop
 
 Begin
+    // initialization
+    Counter := 0;
+    Eps := 0.0;
+    XLast := 0.0;
+    IsFinding := False;
+    GoodFlag := False;
     // output the task
     Writeln('Program solves this example: Ln(7.622x) - 8.59x + 5.');
     Writeln('It is recommended to input epsilon in standard form.');
@@ -25,12 +30,12 @@ Begin
             Writeln('Enter eps:');
             Readln(Eps);
             If Eps > 0.1 Then
-                Raise Exception.Create('Epsilon is too big!!!');
+                Raise EInOutError.Create('Epsilon is too big!!!');
             If Eps < 1.0E-17 Then
-                Raise Exception.Create('Epsilon is too low!!!');
+                Raise EInOutError.Create('Epsilon is too low!!!');
             GoodFlag := True;
         Except
-            On E: Exception Do
+            On E: EInOutError Do
             Begin
                 Write(E.Message);
                 Writeln(' Try again.');
@@ -46,14 +51,14 @@ Begin
             Writeln('Enter X0:');
             Readln(XLast); // x0
             If (XLast < 0) Or (XLast = 0) Then
-                Raise Exception.Create
+                Raise EInOutError.Create
                     ('X0 cannot be less or equal than 0, because in the task there is logarithm(7.622x > 0)!!!');
             If 100 / (859 * XLast) > 1 Then
-                Raise Exception.Create
+                Raise EInOutError.Create
                     ('The problem is not solvable using the inputted X0!!!');
             GoodFlag := True;
         Except
-            On E: Exception Do
+            On E: EInOutError Do
             Begin
                 Write(E.Message);
                 Writeln(' Try again.');
@@ -74,7 +79,7 @@ Begin
     End;
     // output
     Writeln;
-    Writeln('The answer of this task is ', X:1:5);
+    Writeln('The answer of this task is ', X:6:5);
     // freeze console
     Writeln('Press enter to exit...');
     Readln;
